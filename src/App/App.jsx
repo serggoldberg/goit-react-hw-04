@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { fetchPhotos } from "../services/api";
 import ImageGallery from "../ImageGallery/ImageGallery";
+import SearchBar from "../SearchBar/SearchBar";
 
 const App = () => {
   const [photos, setPhotos] = useState([]);
@@ -14,9 +15,10 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      <SearchBar />
       <ImageGallery photos={photos} />
-    </div>
+    </>
   );
 };
 
