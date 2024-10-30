@@ -2,14 +2,16 @@ import { Field, Form, Formik } from "formik";
 import toast, { Toaster } from "react-hot-toast";
 
 const SearchBar = ({ onSubmit }) => {
-  const fieldEmpty = () => toast("Please, enter on the searching field");
+  const fieldEmpty = () =>
+    toast.error("Please, enter text to the search for images.");
 
   const initialValues = { query: "" };
 
   return (
-    <Formik
+    <Formik>
       initialValues={initialValues}
-      onSubmit={(values, actions) => {
+      onSubmit=
+      {(values, actions) => {
         if (values.query.trim() === "") {
           fieldEmpty();
         } else {
@@ -17,10 +19,10 @@ const SearchBar = ({ onSubmit }) => {
         }
         actions.resetForm();
       }}
-    >
       <header>
         <Form>
           <Field
+            name="query"
             type="text"
             autoComplete="off"
             autoFocus
