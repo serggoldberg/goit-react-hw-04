@@ -22,12 +22,9 @@ const App = () => {
         setLoader(true);
         try {
           const data = await fetchPhotos(query, page);
-          if (page === 1) {
-            setPhotos(data.results);
-          } else {
-            setPhotos((prev) => [...prev, ...data.results]);
-          }
-          setError(false);
+          setPhotos((prev) =>
+            page === 1 ? data.results : [...prev, ...data.results]
+          );
         } catch {
           setError(true);
         } finally {
@@ -38,7 +35,7 @@ const App = () => {
     getData();
   }, [query, page]);
 
-  const handleSearch = async (query) => {
+  const handleSearch = (query) => {
     setQuery(query);
     setPage(1);
     setPhotos([]);
@@ -61,14 +58,12 @@ const App = () => {
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
-      {error & <ErrorMessage />}
+      {error && <ErrorMessage />}
       {photos.length > 0 && (
-        <ImageGallery items={photos} openModal={handleOpenModal} />
+        <ImageGallery photos={photos} openModal={handleOpenModal} />
       )}
       {loader && <Loader />}
-      {photos.length > 0 && !loader && (
-        <LoadMoreBtn loadMore={handleLoadMore} />
-      )}
+      {photos.length > 0 && !loader && <LoadMoreBtn onClick={handleLoadMore} />}
       <ImageModal
         isModalOpen={modalWindow}
         closeModal={handleCloseModal}
