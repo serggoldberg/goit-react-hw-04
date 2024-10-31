@@ -8,10 +8,9 @@ const SearchBar = ({ onSubmit }) => {
   const initialValues = { query: "" };
 
   return (
-    <Formik>
+    <Formik
       initialValues={initialValues}
-      onSubmit=
-      {(values, actions) => {
+      onSubmit={(values, actions) => {
         if (values.query.trim() === "") {
           fieldEmpty();
         } else {
@@ -19,6 +18,7 @@ const SearchBar = ({ onSubmit }) => {
         }
         actions.resetForm();
       }}
+    >
       <header>
         <Form>
           <Field

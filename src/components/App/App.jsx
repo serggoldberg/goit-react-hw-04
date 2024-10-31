@@ -38,9 +38,10 @@ const App = () => {
     getData();
   }, [query, page]);
 
-  const handleSearch = () => {
-    setQuery();
+  const handleSearch = async (query) => {
+    setQuery(query);
     setPage(1);
+    setPhotos([]);
   };
 
   const handleLoadMore = () => {
@@ -60,13 +61,11 @@ const App = () => {
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
-      {error ? (
-        <ErrorMessage />
-      ) : (
-        <>
-          <ImageGallery photos={photos} /> {loader && <Loader />}
-        </>
+      {error & <ErrorMessage />}
+      {photos.length > 0 && (
+        <ImageGallery items={photos} openModal={handleOpenModal} />
       )}
+      {loader && <Loader />}
       {photos.length > 0 && !loader && (
         <LoadMoreBtn loadMore={handleLoadMore} />
       )}

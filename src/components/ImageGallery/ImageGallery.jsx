@@ -1,19 +1,13 @@
 import ImageCard from "../ImageCard/ImageCard";
 
-const ImageGallery = ({ photos }) => {
+const ImageGallery = ({ photos, openModal }) => {
   return (
     <ul>
-      {photos.length > 0 ? (
-        photos.map((item) => (
-          <li key={item.id}>
-            <div>
-              <ImageCard item={item} />
-            </div>
-          </li>
-        ))
-      ) : (
-        <p>No images found.</p>
-      )}
+      {photos.map((item) => (
+        <li key={item.id}>
+          <ImageCard item={item} openModal={openModal} />
+        </li>
+      ))}
     </ul>
   );
 };

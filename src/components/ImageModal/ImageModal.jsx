@@ -9,9 +9,6 @@ export default function ImageModal({ isModalOpen, closeModal, targetPhoto }) {
       onRequestClose={closeModal}
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}
-      overlayClassName={css.Overlay}
-      className={css.Content}
-      bodyOpenClassName={css.Open}
     >
       <img src={targetPhoto.url} alt={targetPhoto.alt} />
     </Modal>
